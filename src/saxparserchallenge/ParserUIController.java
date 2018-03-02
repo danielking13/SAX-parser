@@ -40,10 +40,17 @@ public class ParserUIController implements Initializable {
                 Node node = XMLLoader.load(file);
                 ArrayList<Children> children = node.getChildren();
                 for (Children child : children) {
-                    textArea.appendText("Tag: " + child.getTagName() + "\n");
-                    textArea.appendText("Element Data: " + child.getData() + "\n");
-                    textArea.appendText("Attribute = " + child.getAttribute() + "\n");
-                    textArea.appendText("-------------------------\n");
+                    textArea.appendText("<" + child.getTagName());
+                    if(child.getAttribute() != "") {
+                        textArea.appendText(" attribute = " + child.getAttribute() + ">");
+                    } else {
+                        textArea.appendText(">");
+                    }
+//                    textArea.appendText("Element Data: " + child.getData() + "\n");
+                    textArea.appendText(child.getData());
+//                    textArea.appendText("Attribute = " + child.getAttribute() + "\n");
+                       
+                    textArea.appendText("</" + child.getTagName() + ">\n");
                 }
                 
             } catch (Exception ex) {

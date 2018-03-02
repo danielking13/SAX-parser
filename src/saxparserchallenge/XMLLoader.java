@@ -36,7 +36,6 @@ public class XMLLoader {
                 public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
                     //push the encountered element on the element stack
                     elements.push(qName);
-                    System.out.println(qName);
                     
                     //skip over the root element/node
                     if(isRoot) {
@@ -55,26 +54,15 @@ public class XMLLoader {
                     }
                     nodeStack.push(child);
                     
-//                    if (qName.equalsIgnoreCase("student")) {
-//                        student = new Student();
-//                        String idString = attributes.getValue("id");
-//                        if (idString != null) {
-//                            int id = 0;
-//                            try {
-//                                id = Integer.parseInt(idString);
-//                            } catch (NumberFormatException e) {
-//                                throw new SAXException("student id in xml could not be converted to an int");
-//                            }
-//                            student.setId(id);
-//                        }
-//                    }
                 }
                 
                 @Override
                 public void endElement(String uri, String localName, String qName) throws SAXException {
 //                    System.out.println("Popping element: " + elements.peek().toString());
                     elements.pop();
+                    
                     Children childObject = (Children)nodeStack.pop();
+                    
                     if(childObject != null) {
                         node.addChildren(childObject);
                         child = null;
